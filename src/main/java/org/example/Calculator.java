@@ -136,12 +136,14 @@ public class Calculator {
         equalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String result = Double.toString(eval.eval(arr[0] + arr[1] + arr[2]));
-                display1.setText(arr[0] + " " + arr[1] + " " + arr[2] + " = ");
-                display2.setText(result);
-                arr[0] = result;
-                arr[1] = "";
-                arr[2] = "";
+                if (!(arr[1].equals("") || arr[2].equals(""))) {
+                    String result = Double.toString(eval.eval(arr[0] + arr[1] + arr[2]));
+                    display1.setText(arr[0] + " " + arr[1] + " " + arr[2] + " = ");
+                    display2.setText(result);
+                    arr[0] = result;
+                    arr[1] = "";
+                    arr[2] = "";
+                }
             }
         });
 
@@ -150,16 +152,22 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
                 if (arr[1].equals("")) {
                     if (!arr[0].equals("")) {
-                        arr[0] = arr[0].substring(0, arr[0].length() - 1);
+                        double a = Double.parseDouble(arr[0]);
+                        int b = (int) a;
+                        arr[0] = "" + (b - (b % 10)) / 10;
                         if (arr[0].equals("")) {
                             display2.setText("");
                         } else {
                             display2.setText(arr[0]);
                         }
                     }
+
+                    display1.setText("");
                 } else {
                     if (!arr[2].equals("")) {
-                        arr[2] = arr[2].substring(0, arr[2].length() - 1);
+                        double a = Double.parseDouble(arr[2]);
+                        int b = (int) a;
+                        arr[2] = "" + (b - (b % 10)) / 10;
                         if (arr[2].equals("")) {
                             display2.setText("0");
                         } else {
