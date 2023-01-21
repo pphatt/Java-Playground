@@ -5,7 +5,6 @@ import org.example.utils.eval;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Calculator {
     private JPanel panel1;
@@ -29,6 +28,8 @@ public class Calculator {
     private JButton deleteButton;
     private JLabel display1;
     private JLabel display2;
+    private JButton sqrButton;
+    private JButton perButton;
 
     private final String[] arr = {"", "", ""};
 
@@ -101,6 +102,48 @@ public class Calculator {
             public void actionPerformed(ActionEvent e) {
                 if (!arr[0].equals("") || !arr[2].equals("")) {
                     parseNumber("0");
+                }
+            }
+        });
+
+        sqrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (arr[1].equals("")) {
+                    if (!arr[0].equals("")) {
+                        double a = Double.parseDouble(arr[0]);
+                        display1.setText("sqr(" + arr[0] + ")");
+                        arr[0] = "" + a * 2;
+                        display2.setText(arr[0]);
+                    }
+                } else {
+                    if (!arr[2].equals("")) {
+                        double a = Double.parseDouble(arr[2]);
+                        display1.setText(display1.getText() + "sqr(" + arr[2] + ")");
+                        arr[2] = "" + a * 2;
+                        display2.setText(arr[2]);
+                    }
+                }
+            }
+        });
+
+        perButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (arr[1].equals("")) {
+                    if (!arr[0].equals("")) {
+                        double a = Double.parseDouble(arr[0]);
+                        arr[0] = "" + a / 100;
+                        display1.setText(arr[0]);
+                        display2.setText(arr[0]);
+                    }
+                } else {
+                    if (!arr[2].equals("")) {
+                        double a = Double.parseDouble(arr[2]);
+                        arr[2] = "" + a / 100;
+                        display1.setText(display1.getText() + arr[2]);
+                        display2.setText(arr[2]);
+                    }
                 }
             }
         });

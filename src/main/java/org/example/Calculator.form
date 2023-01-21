@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
-      <xy x="193" y="98" width="347" height="392"/>
+      <xy x="193" y="98" width="364" height="392"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -257,6 +257,22 @@
                 </constraints>
                 <properties>
                   <text value="Delete"/>
+                </properties>
+              </component>
+              <component id="311cc" class="javax.swing.JButton" binding="sqrButton">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="X^2"/>
+                </properties>
+              </component>
+              <component id="94324" class="javax.swing.JButton" binding="perButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="%"/>
                 </properties>
               </component>
             </children>
