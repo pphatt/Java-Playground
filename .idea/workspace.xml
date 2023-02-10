@@ -7,8 +7,7 @@
     <list default="true" id="8a23607d-1247-4968-a671-a453be017943" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculator.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculator.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +64,7 @@
       <recent name="D:\Dev\Kanji\src\main\java\org\example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Calculator (2)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Calculator (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Calculator" />
       <module name="Kanji" />
@@ -120,9 +119,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Calculator (2)" />
-        <item itemvalue="Application.Calculator" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Calculator" />
+        <item itemvalue="Application.Calculator (2)" />
         <item itemvalue="Application.Calculator (1)" />
       </list>
     </recent_temporary>
@@ -140,7 +139,12 @@
       <workItem from="1674017750073" duration="16817000" />
       <workItem from="1674126042774" duration="14673000" />
       <workItem from="1674188678724" duration="12469000" />
-      <workItem from="1674275948172" duration="1694000" />
+      <workItem from="1674275948172" duration="2547000" />
+      <workItem from="1675836493687" duration="10219000" />
+      <workItem from="1675864172486" duration="26000" />
+      <workItem from="1675864866393" duration="1784000" />
+      <workItem from="1675947430826" duration="89000" />
+      <workItem from="1676009601290" duration="852000" />
     </task>
     <servers />
   </component>
