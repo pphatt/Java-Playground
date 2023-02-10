@@ -52,6 +52,132 @@ public class Banking {
         scanner.nextLine();
     }
 
+    public void withdrawTransaction(int id) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Withdraw System is being initialized...");
+
+        while (true) {
+            System.out.print("Amount of money to withdraw: ");
+            double amount = scanner.nextDouble();
+
+            if (amount < 0) {
+                System.out.println("Invalid withdraw input... Try again");
+                System.out.println("Do you want to continue the transaction (YES or NO): ");
+                String continueTransaction = scanner.next().toLowerCase();
+
+                if (continueTransaction.equals("no")) {
+                    return;
+                }
+            } else {
+                if (amount > _banking_account.get(id - 1).getBalance()) {
+                    System.out.println("Amount of withdraw money exceeds the balance... Try again");
+                    System.out.print("Do you want to continue the transaction (YES or NO): ");
+                    String continueTransaction = scanner.next().toLowerCase();
+
+                    if (continueTransaction.equals("no")) {
+                        return;
+                    }
+                } else {
+                    System.out.print("Confirm the withdraw amount ( " + amount + " ) (TYPE CONFIRM): ");
+                    String confirm = scanner.next().toLowerCase();
+
+                    if (confirm.equals("confirm")) {
+                        _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
+                    }
+
+                    System.out.println("\t\t\t\t\t\t═══════════ WITHDRAW SUCCESSFULLY ═══════════\t\t\t\t\t");
+                    break;
+                }
+            }
+        }
+    }
+
+    public void depositTransaction(int id) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Deposit System is being initialized...");
+
+        while (true) {
+            System.out.print("Amount of money to deposit: ");
+            double amount = scanner.nextDouble();
+
+            if (amount < 0) {
+                System.out.println("Invalid deposit input... Try again");
+                System.out.print("Do you want to continue the transaction (YES or NO): ");
+                String continueTransaction = scanner.next().toLowerCase();
+
+                if (continueTransaction.equals("no")) {
+                    return;
+                }
+            } else {
+                System.out.print("Confirm the deposit amount ( " + amount + " ) (TYPE CONFIRM): ");
+                String confirm = scanner.next().toLowerCase();
+
+                if (confirm.equals("confirm")) {
+                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() + amount);
+                }
+
+                System.out.println("\t\t\t\t\t\t═══════════ DEPOSIT SUCCESSFULLY ═══════════\t\t\t\t\t");
+                break;
+            }
+        }
+    }
+
+    public void transferTransaction(int id) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Transfer System is being initialized...");
+
+        while (true) {
+            System.out.print("Input Receiver's ID: ");
+            int i = scanner.nextInt();
+
+            if (i > AccountCount() && i < 0) {
+                System.out.println("Invalid Receiver's ID or this Receiver's ID is not exist...");
+                return;
+            }
+
+            if (i == id) {
+                System.out.println("You cannot transfer yourself...");
+                return;
+            }
+
+            System.out.print("Amount of money to Transfer: ");
+            double amount = scanner.nextDouble();
+
+            if (amount < 0) {
+                System.out.println("Invalid Transfer input... Try again");
+                System.out.println("Do you want to continue the transaction (YES or NO): ");
+                String continueTransaction = scanner.next().toLowerCase();
+
+                if (continueTransaction.equals("no")) {
+                    return;
+                }
+            } else {
+                if (amount > _banking_account.get(id - 1).getBalance()) {
+                    System.out.println("Amount of Transfer money exceeds the balance... Try again");
+                    System.out.print("Do you want to continue the transaction (YES or NO): ");
+                    String continueTransaction = scanner.next().toLowerCase();
+
+                    if (continueTransaction.equals("no")) {
+                        return;
+                    }
+                } else {
+                    System.out.print("Confirm the Receiver's ID ( " + i + " ) (TYPE CONFIRM): ");
+                    String confirmId = scanner.next().toLowerCase();
+                    System.out.print("Confirm the Transfer amount ( " + amount + " ) (TYPE CONFIRM): ");
+                    String confirm = scanner.next().toLowerCase();
+
+                    if (confirmId.equals("confirm") && confirm.equals("confirm")) {
+                        _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
+                        _banking_account.get(i - 1).setBalance(_banking_account.get(i - 1).getBalance() + amount);
+                    }
+
+                    System.out.println("\t\t\t\t\t\t═══════════ TRANSFER SUCCESSFULLY ═══════════\t\t\t\t\t");
+                    break;
+                }
+            }
+        }
+    }
+
     public void showAllBankAccounts() {
         System.out.println("\t\t\t\t\t\t═══════════ GETTING BANKING DATA ═══════════\t\t\t\t\t");
         Scanner scanner = new Scanner(System.in);
@@ -126,126 +252,13 @@ public class Banking {
 
             switch (n) {
                 case 1:
-                    System.out.println("Withdraw System is being initialized...");
-
-                    while (true) {
-                        System.out.print("Amount of money to withdraw: ");
-                        double amount = scanner.nextDouble();
-
-                        if (amount < 0) {
-                            System.out.println("Invalid withdraw input... Try again");
-                            System.out.println("Do you want to continue the transaction (YES or NO): ");
-                            String continueTransaction = scanner.next().toLowerCase();
-
-                            if (continueTransaction.equals("no")) {
-                                return;
-                            }
-                        } else {
-                            if (amount > _banking_account.get(id - 1).getBalance()) {
-                                System.out.println("Amount of withdraw money exceeds the balance... Try again");
-                                System.out.print("Do you want to continue the transaction (YES or NO): ");
-                                String continueTransaction = scanner.next().toLowerCase();
-
-                                if (continueTransaction.equals("no")) {
-                                    return;
-                                }
-                            } else {
-                                System.out.print("Confirm the withdraw amount ( " + amount + " ) (TYPE CONFIRM): ");
-                                String confirm = scanner.next().toLowerCase();
-
-                                if (confirm.equals("confirm")) {
-                                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
-                                }
-
-                                System.out.println("\t\t\t\t\t\t═══════════ WITHDRAW SUCCESSFULLY ═══════════\t\t\t\t\t");
-                                break;
-                            }
-                        }
-                    }
-
+                    withdrawTransaction(id);
                     break;
                 case 2:
-                    System.out.println("Deposit System is being initialized...");
-
-                    while (true) {
-                        System.out.print("Amount of money to deposit: ");
-                        double amount = scanner.nextDouble();
-
-                        if (amount < 0) {
-                            System.out.println("Invalid deposit input... Try again");
-                            System.out.print("Do you want to continue the transaction (YES or NO): ");
-                            String continueTransaction = scanner.next().toLowerCase();
-
-                            if (continueTransaction.equals("no")) {
-                                return;
-                            }
-                        } else {
-                            System.out.print("Confirm the deposit amount ( " + amount + " ) (TYPE CONFIRM): ");
-                            String confirm = scanner.next().toLowerCase();
-
-                            if (confirm.equals("confirm")) {
-                                _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() + amount);
-                            }
-
-                            System.out.println("\t\t\t\t\t\t═══════════ DEPOSIT SUCCESSFULLY ═══════════\t\t\t\t\t");
-                            break;
-                        }
-                    }
-
+                    depositTransaction(id);
                     break;
                 case 3:
-                    System.out.println("Transfer System is being initialized...");
-
-                    while (true) {
-                        System.out.print("Input Receiver's ID: ");
-                        int i = scanner.nextInt();
-
-                        if (i > AccountCount() && i < 0) {
-                            System.out.println("Invalid Receiver's ID or this Receiver's ID is not exist...");
-                            return;
-                        }
-
-                        if (i == id) {
-                            System.out.println("You cannot transfer yourself...");
-                            return;
-                        }
-
-                        System.out.print("Amount of money to Transfer: ");
-                        double amount = scanner.nextDouble();
-
-                        if (amount < 0) {
-                            System.out.println("Invalid Transfer input... Try again");
-                            System.out.println("Do you want to continue the transaction (YES or NO): ");
-                            String continueTransaction = scanner.next().toLowerCase();
-
-                            if (continueTransaction.equals("no")) {
-                                return;
-                            }
-                        } else {
-                            if (amount > _banking_account.get(id - 1).getBalance()) {
-                                System.out.println("Amount of Transfer money exceeds the balance... Try again");
-                                System.out.print("Do you want to continue the transaction (YES or NO): ");
-                                String continueTransaction = scanner.next().toLowerCase();
-
-                                if (continueTransaction.equals("no")) {
-                                    return;
-                                }
-                            } else {
-                                System.out.print("Confirm the Receiver's ID ( " + i + " ) (TYPE CONFIRM): ");
-                                String confirmId = scanner.next().toLowerCase();
-                                System.out.print("Confirm the Transfer amount ( " + amount + " ) (TYPE CONFIRM): ");
-                                String confirm = scanner.next().toLowerCase();
-
-                                if (confirmId.equals("confirm") && confirm.equals("confirm")) {
-                                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
-                                    _banking_account.get(i - 1).setBalance(_banking_account.get(id - 1).getBalance() + amount);
-                                }
-
-                                System.out.println("\t\t\t\t\t\t═══════════ TRANSFER SUCCESSFULLY ═══════════\t\t\t\t\t");
-                                break;
-                            }
-                        }
-                    }
+                    transferTransaction(id);
                     break;
                 case 4:
                     break;
