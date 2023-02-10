@@ -10,16 +10,19 @@ public class Main {
 //        scan.nextLine();
 //        student.editGrade();
 
-        Fraction fraction1 = new Fraction(2, 4);
-        Fraction fraction2 = new Fraction(3, 6);
-//        Fraction fraction3 = new Fraction()
-        System.out.println(fraction1.getFraction());
-        System.out.println(fraction2.getFraction());
-        System.out.println();
-        System.out.println(Fraction.plusFraction(fraction1, fraction2).getFraction());
-        System.out.println(Fraction.subtractFraction(fraction1, fraction2).getFraction());
-        System.out.println(Fraction.multiplyFraction(fraction1, fraction2).getFraction());
+//        Fraction fraction1 = new Fraction(2, 4);
+//        Fraction fraction2 = new Fraction(3, 6);
+////        Fraction fraction3 = new Fraction()
+//        System.out.println(fraction1.getFraction());
+//        System.out.println(fraction2.getFraction());
+//        System.out.println();
+//        System.out.println(Fraction.plusFraction(fraction1, fraction2).getFraction());
+//        System.out.println(Fraction.subtractFraction(fraction1, fraction2).getFraction());
+//        System.out.println(Fraction.multiplyFraction(fraction1, fraction2).getFraction());
 //        System.out.println(Fraction.simplifyFraction(fraction).getFraction());
 //        System.out.println(fraction.getFraction());
+
+        Menu menu = new Menu();
+//        System.out.println(String.format("%-" + (1 + 1) + "s", "") + "id");
     }
 }
