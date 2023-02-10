@@ -1,39 +1,40 @@
 package org.example;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Menu {
-    public Menu() {
-        Banking bank = new Banking();
+    private static final ArrayList<String> choice = new ArrayList<>();
+    private static final ArrayList<Runnable> choiceFunction = new ArrayList<>();
 
+    public static void run() {
         while (true) {
-            System.out.println("\n\t\t\t\t\t\t             BANKING SYSTEM             \t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t╔═════════════════ MENU ═════════════════╗\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 01. BANK INFORMATION                   ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 02. ADD BANK ACCOUNT                   ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 03. WITHDRAW MONEY                     ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 04. DEPOSIT MONEY                      ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 05. SHOW ALL ACCOUNT                   ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t║ 06. EXIT                               ║\t\t\t\t\t");
-            System.out.println("\t\t\t\t\t\t╚════════════════════════════════════════╝\t\t\t\t\t");
+            System.out.println("\n\t\t\t\t\t\t╔═════════════════ MENU ═════════════════╗");
+
+            for (int i = 0; i < choice.size(); i++) {
+                System.out.println("\t\t\t\t\t\t║ " + (i < 10 ? "0" + (i + 1) : i + 1) + ". " + choice.get(i)
+                        + String.format("%-" + (35 - choice.get(i).length()) + "s", "") + "║");
+            }
+
+            System.out.println("\t\t\t\t\t\t╚════════════════════════════════════════╝");
             System.out.print("Input to use: ");
             Scanner scanner = new Scanner(System.in);
             int number = scanner.nextInt();
 
-            switch (number) {
-                case 1:
-                    break;
-                case 2:
-                    bank.addBankAccount();
-                    break;
-                case 5:
-                    bank.showAllBankAccounts();
-                    break;
-                case 6:
-                    System.out.println("\t\t\t\t\t\t═════════════ EXIT ══════════════\t\t\t\t\t");
-                    return;
-                default:
-                    return;
+            if (number > choice.size() || number < 0) {
+                System.out.println("Invalid input...");
+                return;
+            }
+
+            choiceFunction.get(number - 1).run();
+
+            if (number == choice.size()) {
+                return;
             }
         }
+    }
+
+    public static void add(String name, Runnable function) {
+        choice.add(name);
+        choiceFunction.add(function);
     }
 }

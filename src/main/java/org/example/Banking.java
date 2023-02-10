@@ -3,7 +3,7 @@ package org.example;
 import java.util.*;
 
 public class Banking {
-    private static ArrayList<BankAccount> _banking_account = new ArrayList<BankAccount>();
+    private static final ArrayList<BankAccount> _banking_account = new ArrayList<BankAccount>();
 
     public Banking() {
         _banking_account.add(new BankAccount("Duong", 20, "male"));
@@ -34,15 +34,12 @@ public class Banking {
         String sex;
 
         switch (sexChoice) {
-            case 1:
-                sex = "Male";
-                break;
-            case 2:
-                sex = "Female";
-                break;
-            default:
+            case 1 -> sex = "Male";
+            case 2 -> sex = "Female";
+            default -> {
                 System.out.println("Invalid Input Sex");
                 return;
+            }
         }
 
         BankAccount bankAccount = new BankAccount(name, age, sex);
@@ -81,10 +78,13 @@ public class Banking {
                     System.out.print("Confirm the withdraw amount ( " + amount + " ) (TYPE CONFIRM): ");
                     String confirm = scanner.next().toLowerCase();
 
-                    if (confirm.equals("confirm")) {
-                        _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
+                    if (!confirm.equals("confirm")) {
+                        System.out.println("Cancel withdraw successfully");
+                        return;
                     }
 
+                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
+                    _banking_account.get(id - 1).setLogs(new BankAccount.Log("Withdraw", "Withdraw: " + amount + "$"));
                     System.out.println("\t\t\t\t\t\t═══════════ WITHDRAW SUCCESSFULLY ═══════════\t\t\t\t\t");
                     break;
                 }
@@ -112,10 +112,13 @@ public class Banking {
                 System.out.print("Confirm the deposit amount ( " + amount + " ) (TYPE CONFIRM): ");
                 String confirm = scanner.next().toLowerCase();
 
-                if (confirm.equals("confirm")) {
-                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() + amount);
+                if (!confirm.equals("confirm")) {
+                    System.out.println("Cancel deposit successfully");
+                    return;
                 }
 
+                _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() + amount);
+                _banking_account.get(id - 1).setLogs(new BankAccount.Log("Deposit", "Deposit: " + amount + "$"));
                 System.out.println("\t\t\t\t\t\t═══════════ DEPOSIT SUCCESSFULLY ═══════════\t\t\t\t\t");
                 break;
             }
@@ -166,11 +169,15 @@ public class Banking {
                     System.out.print("Confirm the Transfer amount ( " + amount + " ) (TYPE CONFIRM): ");
                     String confirm = scanner.next().toLowerCase();
 
-                    if (confirmId.equals("confirm") && confirm.equals("confirm")) {
-                        _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
-                        _banking_account.get(i - 1).setBalance(_banking_account.get(i - 1).getBalance() + amount);
+                    if (!(confirmId.equals("confirm") && confirm.equals("confirm"))) {
+                        System.out.println("Cancel deposit successfully");
+                        return;
                     }
 
+                    _banking_account.get(id - 1).setBalance(_banking_account.get(id - 1).getBalance() - amount);
+                    _banking_account.get(i - 1).setBalance(_banking_account.get(i - 1).getBalance() + amount);
+
+                    _banking_account.get(id - 1).setLogs(new BankAccount.Log("Transfer", "Transfer: " + amount + "$ to -> " + i));
                     System.out.println("\t\t\t\t\t\t═══════════ TRANSFER SUCCESSFULLY ═══════════\t\t\t\t\t");
                     break;
                 }
@@ -181,10 +188,10 @@ public class Banking {
     public void showAllBankAccounts() {
         System.out.println("\t\t\t\t\t\t═══════════ GETTING BANKING DATA ═══════════\t\t\t\t\t");
         Scanner scanner = new Scanner(System.in);
-        int[] arr = {5, 80, 5, 8, 10};
+        int[] arr = {5, 80, 5, 8, 10, 50};
 
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print("╔" + Repeat("═", arr[i]) + "╗");
+        for (int k : arr) {
+            System.out.print("╔" + Repeat("═", k) + "╗");
         }
 
         System.out.println();
@@ -194,17 +201,18 @@ public class Banking {
                         "║ Name" + String.format("%-75s", "") + "║" +
                         "║ Age" + String.format("%-1s", "") + "║" +
                         "║ Sex" + String.format("%-4s", "") + "║" +
-                        "║ Balance" + String.format("%-2s", "") + "║"
+                        "║ Balance" + String.format("%-2s", "") + "║" +
+                        "║ Log" + String.format("%-46s", "") + "║"
         );
 
         for (BankAccount account : _banking_account) {
-            for (int i = 0; i < arr.length; i++) {
-                System.out.print(" " + Repeat("═", arr[i]) + " ");
+            for (int j : arr) {
+                System.out.print(" " + Repeat("═", j) + " ");
             }
 
             System.out.println();
 
-            System.out.println(
+            System.out.print(
                     "║ " + account.getID() + String.format("%-" + (4 - Integer.toString(account.getID()).length()) + "s", "") + "║" +
                             "║ " + account.getName() + String.format("%-" + (79 - account.getName().length()) + "s", "") + "║" +
                             "║ " + account.getAge() + String.format("%-" + (4 - Integer.toString(account.getAge()).length()) + "s", "") + "║" +
@@ -212,10 +220,31 @@ public class Banking {
                             + String.format("%-" + (7 - account.getSex().length()) + "s", "") + "║" +
                             "║ " + account.getBalance() + "$" + String.format("%-" + (8 - Double.toString(account.getBalance()).length()) + "s", "") + "║"
             );
+
+            if (account.getLogs().size() > 0) {
+                for (int i = 0; i < account.getLogs().size(); i++) {
+                    System.out.print("║ " + account.getLogs().get(i).getLogCommit()
+                            + String.format("%-" + (49 - account.getLogs().get(i).getLogCommit().length()) + "s", "") + "║");
+
+                    if (i != account.getLogs().size() - 1) {
+                        System.out.print(
+                                "\n║" + String.format("%-5s", "") + "║" +
+                                        "║" + String.format("%-80s", "") + "║" +
+                                        "║" + String.format("%-5s", "") + "║" +
+                                        "║" + String.format("%-8s", "") + "║" +
+                                        "║" + String.format("%-10s", "") + "║"
+                        );
+                    } else {
+                        System.out.println();
+                    }
+                }
+            } else {
+                System.out.println("║ " + "No transaction occurred" + String.format("%-26s", "") + "║");
+            }
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print("╚" + Repeat("═", arr[i]) + "╝");
+        for (int j : arr) {
+            System.out.print("╚" + Repeat("═", j) + "╝");
         }
 
         System.out.println();

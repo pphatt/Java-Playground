@@ -12,16 +12,25 @@ public class BankAccount {
     private double Balance;
     private int Count;
 
-    public class Log {
+    private final ArrayList<Log> log = new ArrayList<Log>();
+
+    public static class Log {
         private String logTime;
-        private String logDescription;
-        private int sender;
+        private String logHeaderCommit;
+        private String logCommit;
         private int receiver;
 
-        public Log(String logDescription, int sender, int receiver) {
+        public Log(String logHeaderCommit, String logCommit) {
             setLogTime();
-            setLogDescription(logDescription);
-            setSender(sender);
+            setLogHeaderCommit(logHeaderCommit);
+            setLogCommit(logCommit);
+            setReceiver(receiver);
+        }
+
+        public Log(String logHeaderCommit, String logCommit, int receiver) {
+            setLogTime();
+            setLogHeaderCommit(logHeaderCommit);
+            setLogCommit(logCommit);
             setReceiver(receiver);
         }
 
@@ -33,20 +42,20 @@ public class BankAccount {
             this.logTime = LocalDate.now() + " " + LocalTime.now();
         }
 
-        public String getLogDescription() {
-            return logDescription;
+        public String getLogHeaderCommit() {
+            return logHeaderCommit;
         }
 
-        public void setLogDescription(String logDescription) {
-            this.logDescription = logDescription;
+        public void setLogHeaderCommit(String logHeaderCommit) {
+            this.logHeaderCommit = logHeaderCommit;
         }
 
-        public int getSender() {
-            return sender;
+        public String getLogCommit() {
+            return logCommit;
         }
 
-        public void setSender(int sender) {
-            this.sender = sender;
+        public void setLogCommit(String logCommit) {
+            this.logCommit = logCommit;
         }
 
         public int getReceiver() {
@@ -119,7 +128,11 @@ public class BankAccount {
         Count = 0;
     }
 
-//    public Log getLog() {
-//        return ;
-//    }
+    public ArrayList<Log> getLogs() {
+        return log;
+    }
+
+    public void setLogs(Log log) {
+        this.log.add(log);
+    }
 }

@@ -22,7 +22,18 @@ public class Main {
 //        System.out.println(Fraction.simplifyFraction(fraction).getFraction());
 //        System.out.println(fraction.getFraction());
 
-        Menu menu = new Menu();
-//        System.out.println(String.format("%-" + (1 + 1) + "s", "") + "id");
+        Banking bank = new Banking();
+
+        Menu.add("BANK INFORMATION", () -> {
+        });
+        Menu.add("ADD BANK ACCOUNT", bank::addBankAccount);
+        Menu.add("WITHDRAW MONEY", () -> {
+        });
+        Menu.add("DEPOSIT MONEY", () -> {
+        });
+        Menu.add("SHOW ALL ACCOUNT", bank::showAllBankAccounts);
+        Menu.add("EXIT", () -> System.out.println("\t\t\t\t\t\t═════════════ EXIT ══════════════\t\t\t\t\t"));
+
+        Menu.run();
     }
 }
